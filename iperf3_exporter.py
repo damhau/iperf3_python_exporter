@@ -58,11 +58,11 @@ def get_data():
         client.port = iperf3_server_port
         result = client.run()
         iperf3_tcp_tcp_mss_default.labels(server=iperf3_server, protocol=iperf3_proto, local_host=result.local_host).set(result.tcp_mss_default)
-        iperf3_tcp_retransmits.labels(server=iperf3_server, protocol=iperf3_proto).set(result.retransmits)
-        iperf3_tcp_sent_bytes.labels(server=iperf3_server, protocol=iperf3_proto).set(result.sent_bytes)
-        iperf3_tcp_sent_bps.labels(server=iperf3_server, protocol=iperf3_proto).set(result.sent_bps)
-        iperf3_tcp_received_bytes.labels(server=iperf3_server, protocol=iperf3_proto).set(result.received_bytes)
-        iperf3_tcp_received_bps.labels(server=iperf3_server, protocol=iperf3_proto).set(result.received_bps)
+        iperf3_tcp_retransmits.labels(server=iperf3_server, protocol=iperf3_proto, local_host=result.local_host).set(result.retransmits)
+        iperf3_tcp_sent_bytes.labels(server=iperf3_server, protocol=iperf3_proto, local_host=result.local_host).set(result.sent_bytes)
+        iperf3_tcp_sent_bps.labels(server=iperf3_server, protocol=iperf3_proto, local_host=result.local_host).set(result.sent_bps)
+        iperf3_tcp_received_bytes.labels(server=iperf3_server, protocol=iperf3_proto, local_host=result.local_host).set(result.received_bytes)
+        iperf3_tcp_received_bps.labels(server=iperf3_server, protocol=iperf3_proto, local_host=result.local_host).set(result.received_bps)
     elif iperf3_proto == 'udp':
         client = iperf3.Client()
         if iperf3_duration:
