@@ -13,8 +13,7 @@ app = Flask(__name__)
 app.debug = False
 
 # Instanciate Logger
-logging.basicConfig(filename='/var/log/iperf_exporter.log',level=logging.DEBUG)
-logging.debug('Starting iperf_exporter')
+logging.info('Starting iperf_exporter')
  
 # Misc vars
 CONTENT_TYPE_LATEST = str('text/plain; version=0.0.4; charset=utf-8')
@@ -47,7 +46,7 @@ def get_data():
     iperf3_num_streams = request.args.get('streams')
     iperf3_reverse = request.args.get('reverse')
     iperf3_api_port = request.args.get('apiport')
-    logging.debug('Received http request to /metric')
+    logging.info('Received http request to /metric')
     logging.debug('iperf3_server:' + str(iperf3_server))
     logging.debug('iperf3_proto:' + str(iperf3_proto))
     logging.debug('iperf3_omit:' + str(iperf3_omit))
@@ -77,7 +76,7 @@ def get_data():
         client.server_hostname = iperf3_server
         client.port = iperf3_server_port
         
-        logging.debug('Started iperf test')
+        logging.info('Started tcp iperf test')
         logging.debug('client:' + str(client))
         logging.debug('client.port:' + str(client.port))
         result = client.run()
@@ -99,6 +98,7 @@ def get_data():
             client.bandwidth = int(iperf3_bandwidth)
         client.server_hostname = iperf3_server
         client.port = iperf3_server_port
+        logging.info('Started udp iperf test')
         result = client.run()
         iperf3_udp_bytes.labels(server=iperf3_server, protocol=iperf3_proto).set(result.bytes)
         iperf3_udp_bps.labels(server=iperf3_server, protocol=iperf3_proto).set(result.bps)
