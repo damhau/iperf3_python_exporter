@@ -81,6 +81,6 @@ def route_iperf3_increment():
     return jsonify({'started': True, 'port': iperf3_port, 'hostname': iperf3_hostname })
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=iperf3_server_port, threaded=True)
-    #http_server = WSGIServer(('', iperf3_server_port), app)
-    #http_server.serve_forever()
+    # app.run(host='0.0.0.0', port=iperf3_server_port, threaded=True)
+    http_server = WSGIServer(('', iperf3_server_port), app)
+    http_server.serve_forever()
