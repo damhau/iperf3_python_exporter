@@ -10,14 +10,11 @@ executor = ThreadPoolExecutor(64)
 
 parser = argparse.ArgumentParser()
    
-parser.add_argument('-s', '--start_port', action='store_true', 
-    help="Random iperf3 server range start port")
+parser.add_argument('-s', '--start_port', action='store_true', type=int, help="Random iperf3 server range start port")
 
-parser.add_argument('-e', '--end_port', action='store_true', 
-    help="Random iperf3 server range end port")
+parser.add_argument('-e', '--end_port', action='store_true', type=int, help="Random iperf3 server range end port")
 
-parser.add_argument('-n', '--name', action='store_true', 
-    help="Iperf3 server hostname")
+parser.add_argument('-n', '--name', action='store_true', type=string, help="Iperf3 server hostname")
 
 args = parser.parse_args()
 
