@@ -37,6 +37,26 @@ iperf3_udp_lost_percent = Gauge('iperf3_udp_lost_percent', 'Percent of lost pack
 iperf3_udp_seconds = Gauge('iperf3_udp_seconds', 'DUration of test in seconds', ['server', 'protocol'],)
 
 
+def start_iperf3_tcp_thread(port, server, duration, omit):
+    logging.info('Started iperf thread on port ' + str(port))
+    server = iperf3.Server()
+    logging.debug('server' + str(server))
+    server.port = port
+    logging.debug('server.port' + str(server.port))
+    server.run()
+    logging.debug('server.run' + str(server))
+    logging.info('Stopped iperf thread')
+
+def start_iperf3_udp_thread(port):
+    logging.info('Started iperf thread on port ' + str(port))
+    server = iperf3.Server()
+    logging.debug('server' + str(server))
+    server.port = port
+    logging.debug('server.port' + str(server.port))
+    server.run()
+    logging.debug('server.run' + str(server))
+    logging.info('Stopped iperf thread')
+
 @app.route('/metrics', methods=['GET'])
 def get_data():
     iperf3_server = request.args.get('server')
@@ -113,6 +133,6 @@ def get_data():
  
 
 if __name__ == '__main__':
-    # app.run(host='0.0.0.0', port='9100')
-    http_server = WSGIServer(('', 9100), app)
-    http_server.serve_forever()
+    app.run(host='0.0.0.0', port='9100', threaded=True)
+    #http_server = WSGIServer(('', 9100), app)
+    #http_server.serve_forever()
