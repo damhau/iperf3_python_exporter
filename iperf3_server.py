@@ -21,10 +21,10 @@ args = parser.parse_args()
 
 # vars
 iperf3_server_port = args.port
-iperf3_start_port = args.start_port
-iperf3_end_port = args.end_port
+global iperf3_start_port = args.start_port
+global iperf3_end_port = args.end_port
 iperf3_hostname = args.name
-iperf3_port = iperf3_start_port + 1
+global iperf3_port = iperf3_start_port + 1
 
 def start_iperf3_thread(port):
     server = iperf3.Server()
