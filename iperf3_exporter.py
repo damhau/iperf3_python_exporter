@@ -44,7 +44,7 @@ def get_data():
     iperf3_reverse = request.args.get('reverse')
     iperf3_api_port = request.args.get('apiport')
 
-    url = "http://" + iperf3_server + ":" + iperf3_api_port + "/iperf3_random"
+    url = "http://" + iperf3_server + ":" + iperf3_api_port + "/iperf3_increment"
     response = requests.get(url)
     json_data = response.json()
     iperf3_server_port = json_data['port']
