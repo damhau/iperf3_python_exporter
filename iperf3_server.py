@@ -17,7 +17,7 @@ parser.add_argument('-s', '--start_port', action='store', dest='start_port', typ
 parser.add_argument('-e', '--end_port', action='store', dest='end_port', type=int, help="Random iperf3 server range end port")
 parser.add_argument('-p', '--port', action='store', dest='port', type=int, help="Random iperf3 server api port")
 parser.add_argument('-n', '--name', action='store', dest='name', help="Iperf3 server hostname")
-parser.add_argument("-v", "--verbose", action = "count", default = 2, help = "Increase verbosity")
+parser.add_argument('-v', '--verbose' action = 'count', default = 2, help = 'Increase verbosity')
 args = parser.parse_args()
 
 # Instanciate Logger
@@ -33,12 +33,15 @@ except KeyError:
 logging.basicConfig(level=loglevel)
 logging.info('Starting iperf_server')
 
+
 # vars
 iperf3_server_port = args.port
 iperf3_start_port = args.start_port
 iperf3_end_port = args.end_port
 iperf3_hostname = args.name
 iperf3_port = iperf3_start_port + 1
+
+logging.debug('iperf3_server_port: ' + str(iperf3_server_port))
 
 def start_iperf3_thread(port):
     logging.info('Started iperf thread on port ' + str(port))
