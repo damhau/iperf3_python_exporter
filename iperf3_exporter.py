@@ -41,8 +41,9 @@ def get_data():
     iperf3_bandwidth = request.args.get('bandwidth')
     iperf3_num_streams = request.args.get('streams')
     iperf3_reverse = request.args.get('reverse')
+    iperf3_api_port = request.args.get('apiport')
 
-    url = "http://" + iperf3_server + ":5000/iperf3_random"
+    url = "http://" + iperf3_server + ":" + iperf3_api_port + "/iperf3_random"
     response = requests.get(url)
     json_data = response.json()
     iperf3_server_port = json_data['port']
