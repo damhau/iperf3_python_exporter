@@ -16,7 +16,7 @@ parser.add_argument('-s', '--start_port', action='store_true',
 parser.add_argument('-e', '--end_port', action='store_true', 
     help="Random iperf3 server range end port")
 
-parser.add_argument('-h', '--hostname', action='store_true', 
+parser.add_argument('-n', '--name', action='store_true', 
     help="Iperf3 server hostname")
 
 args = parser.parse_args()
@@ -25,7 +25,7 @@ args = parser.parse_args()
 # vars
 iperf3_start_port = args.start_port
 iperf3_end_port = args.end_port
-iperf3_hostname = args.hostname
+iperf3_hostname = args.name
 iperf3_port = iperf3_start_port + 1
 
 def start_iperf3_thread(port):
