@@ -13,7 +13,10 @@ app = Flask(__name__)
 app.debug = False
 
 # Instanciate Logger
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    format='%(asctime)s %(levelname)-8s %(message)s',
+    level=logging.INFO,
+    datefmt='%d-%m-%Y %H:%M:%S')
 logging.info('Starting iperf_server')
  
 # Misc vars

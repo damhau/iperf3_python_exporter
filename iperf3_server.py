@@ -30,7 +30,10 @@ try:
     }[args.verbose]
 except KeyError:
     loglevel = logging.INFO
-logging.basicConfig(level=loglevel)
+logging.basicConfig(
+    format='%(asctime)s %(levelname)-8s %(message)s',
+    level=loglevel,
+    datefmt='%d-%m-%Y %H:%M:%S')
 logging.info('Starting iperf_server')
 
 
