@@ -10,19 +10,17 @@ executor = ThreadPoolExecutor(64)
 
 parser = argparse.ArgumentParser()
    
-parser.add_argument('-s', '--start_port', action='store_true', type=int, help="Random iperf3 server range start port")
-
-parser.add_argument('-e', '--end_port', action='store_true', type=int, help="Random iperf3 server range end port")
-
-parser.add_argument('-n', '--name', action='store_true', type=string, help="Iperf3 server hostname")
+parser.add_argument('-s', '--start_port', action='store_true', dest='iperf3_start_port', type=int, help="Random iperf3 server range start port")
+parser.add_argument('-e', '--end_port', action='store', dest='iperf3_end_port', type=int, help="Random iperf3 server range end port")
+parser.add_argument('-n', '--name', action='store', dest='iperf3_hostname', type=string, help="Iperf3 server hostname")
 
 args = parser.parse_args()
 
 
 # vars
-iperf3_start_port = args.start_port
-iperf3_end_port = args.end_port
-iperf3_hostname = args.name
+# iperf3_start_port = args.start_port
+# iperf3_end_port = args.end_port
+# iperf3_hostname = args.name
 iperf3_port = iperf3_start_port + 1
 
 def start_iperf3_thread(port):
