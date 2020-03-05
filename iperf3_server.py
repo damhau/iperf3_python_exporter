@@ -26,6 +26,7 @@ args = parser.parse_args()
 iperf3_start_port = args.start_port
 iperf3_end_port = args.end_port
 iperf3_hostname = args.hostname
+iperf3_port = iperf3_start_port + 1
 
 def start_iperf3_thread(port):
     server = iperf3.Server()
@@ -44,6 +45,16 @@ def route_iperf3():
 
 @app.route('/iperf3_random')
 def route_iperf3_random():
+    iperf3_port = random.randrange(iperf3_start_port, iperf3_end_port)
+    executor.submit(start_iperf3_thread, iperf3_port)
+    return jsonify({'started': True, 'port': iperf3_port, 'hostname': iperf3_hostname })
+
+@app.route('/iperf3_increment')
+def route_iperf3_increment():
+    if iperf3_port > iperf3_end_port:
+        iperf3_port = iperf3_start_port + 1
+    else:
+        iperf3_port = iperf3_start_port
     iperf3_port = random.randrange(iperf3_start_port, iperf3_end_port)
     executor.submit(start_iperf3_thread, iperf3_port)
     return jsonify({'started': True, 'port': iperf3_port, 'hostname': iperf3_hostname })
