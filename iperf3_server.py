@@ -9,7 +9,7 @@ import logging
 
 app = Flask(__name__)
 app.debug = False
-executor = ThreadPoolExecutor(64)
+executor = ThreadPoolExecutor(256)
 
 # Parse args
 parser = argparse.ArgumentParser()  
@@ -67,7 +67,7 @@ def route_iperf3():
 @app.route('/iperf3_random')
 def route_iperf3_random():
     iperf3_port = random.randrange(iperf3_start_port, iperf3_end_port)
-    executor.submit(start_iperf3_thread, iperf3_port)
+    future = executor.submit(start_iperf3_thread, iperf3_port)
     return jsonify({'started': True, 'port': iperf3_port, 'hostname': iperf3_hostname })
 
 @app.route('/iperf3_increment')
