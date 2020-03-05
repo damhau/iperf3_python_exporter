@@ -64,7 +64,7 @@ def get_data():
     logging.debug("Json data:")
     logging.debug(json_data)
     iperf3_server_port = json_data['port']
-
+    logging.debug("iperf3_server_port:" + str(iperf3_server_port))
     if iperf3_proto == 'tcp':
         client = iperf3.Client()
         if iperf3_duration:
