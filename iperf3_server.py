@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser()
    
 parser.add_argument('-s', '--start_port', action='store', dest='iperf3_start_port', type=int, help="Random iperf3 server range start port")
 parser.add_argument('-e', '--end_port', action='store', dest='iperf3_end_port', type=int, help="Random iperf3 server range end port")
-parser.add_argument('-n', '--name', action='store', dest='iperf3_hostname', type=string, help="Iperf3 server hostname")
+parser.add_argument('-n', '--name', action='store', dest='iperf3_hostname', help="Iperf3 server hostname")
 
 args = parser.parse_args()
 
