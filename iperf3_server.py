@@ -24,7 +24,8 @@ iperf3_server_port = args.port
 global iperf3_start_port = args.start_port
 global iperf3_end_port = args.end_port
 iperf3_hostname = args.name
-global iperf3_port = iperf3_start_port + 1
+global iperf3_port
+iperf3_port = iperf3_start_port + 1
 
 def start_iperf3_thread(port):
     server = iperf3.Server()
