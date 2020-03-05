@@ -54,7 +54,7 @@ def route_iperf3_increment():
         iperf3_port = iperf3_start_port + 1
     else:
         iperf3_port = iperf3_start_port
-    iperf3_port = random.randrange(iperf3_start_port, iperf3_end_port)
+    #iperf3_port = random.randrange(iperf3_start_port, iperf3_end_port)
     executor.submit(start_iperf3_thread, iperf3_port)
     return jsonify({'started': True, 'port': iperf3_port, 'hostname': iperf3_hostname })
 
