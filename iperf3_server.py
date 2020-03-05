@@ -17,9 +17,12 @@ parser.add_argument('-s', '--start_port', action='store', dest='start_port', typ
 parser.add_argument('-e', '--end_port', action='store', dest='end_port', type=int, help="Random iperf3 server range end port")
 parser.add_argument('-p', '--port', action='store', dest='port', type=int, help="Random iperf3 server api port")
 parser.add_argument('-n', '--name', action='store', dest='name', help="Iperf3 server hostname")
+parser.add_argument('-l', '--log', action='store', dest='log', help="Log level")
 args = parser.parse_args()
 
 # Instanciate Logger
+log_level = "logging." + str(log)
+logging.basicConfig(level=log_level)
 logging.info('Starting iperf_server')
 
 # vars

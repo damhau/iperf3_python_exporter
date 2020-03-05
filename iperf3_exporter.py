@@ -13,7 +13,8 @@ app = Flask(__name__)
 app.debug = False
 
 # Instanciate Logger
-logging.info('Starting iperf_exporter')
+logging.basicConfig(level="logging.INFO")
+logging.info('Starting iperf_server')
  
 # Misc vars
 CONTENT_TYPE_LATEST = str('text/plain; version=0.0.4; charset=utf-8')
