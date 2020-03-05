@@ -25,7 +25,7 @@ try:
     loglevel = {
         0: logging.ERROR,
         1: logging.WARN,
-        2: logging.INFO
+        2: logging.INFO,
         3: logging.DEBUG
     }[args.verbose]
 except KeyError:
