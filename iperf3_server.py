@@ -3,14 +3,29 @@ from flask import Flask, jsonify, request
 import iperf3
 from concurrent.futures import ThreadPoolExecutor
 import random
+import argparse
 
 app = Flask(__name__)
 executor = ThreadPoolExecutor(64)
 
+parser = argparse.ArgumentParser()
+   
+parser.add_argument('-s', '--start_port', action='store_true', 
+    help="Random iperf3 server range start port")
+
+parser.add_argument('-e', '--end_port', action='store_true', 
+    help="Random iperf3 server range end port")
+
+parser.add_argument('-h', '--hostname', action='store_true', 
+    help="Iperf3 server hostname")
+
+args = parser.parse_args()
+
+
 # vars
-iperf3_start_port = 1024
-iperf3_end_port = 65500
-iperf3_hostname = 'localhost'
+iperf3_start_port = args.start_port
+iperf3_end_port = args.end_port
+iperf3_hostname = args.hostname
 
 def start_iperf3_thread(port):
     server = iperf3.Server()
