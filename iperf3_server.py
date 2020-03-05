@@ -6,6 +6,7 @@ import random
 import argparse
 
 app = Flask(__name__)
+app.debug = False
 executor = ThreadPoolExecutor(64)
 
 parser = argparse.ArgumentParser()
@@ -57,4 +58,4 @@ def route_iperf3_increment():
     return jsonify({'started': True, 'port': iperf3_port, 'hostname': iperf3_hostname })
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=iperf3_server_port, debug=false)
+    app.run(host='0.0.0.0', port=iperf3_server_port)
