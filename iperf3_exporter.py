@@ -7,6 +7,7 @@ import iperf3
 
 # Instanciate Flask app
 app = Flask(__name__)
+app.debug = False
 
 # Instanciate Logger
 logger = logging.getLogger(__name__)
