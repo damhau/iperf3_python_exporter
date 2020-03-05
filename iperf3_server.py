@@ -21,7 +21,7 @@ parser.add_argument('-l', '--log', action='store', dest='log', help="Log level")
 args = parser.parse_args()
 
 # Instanciate Logger
-log_level = "logging." + str(log)
+log_level = "logging." + str(args.log)
 logging.basicConfig(level=log_level)
 logging.info('Starting iperf_server')
 
