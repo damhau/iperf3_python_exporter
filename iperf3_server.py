@@ -77,7 +77,16 @@ def route_iperf3_increment():
         iperf3_port = iperf3_start_port
     else:
         iperf3_port = iperf3_port + 1
-    executor.submit(start_iperf3_thread, iperf3_port)
+    
+    # executor.submit(start_iperf3_thread, iperf3_port)
+    logging.info('Started iperf thread on port ' + str(iperf3_port))
+    server = iperf3.Server()
+    logging.debug('server' + str(server))
+    server.port = iperf3_port
+    logging.debug('server.port' + str(server.port))
+    server.run()
+    logging.debug('server.run' + str(server))
+    logging.info('Stopped iperf thread')
     return jsonify({'started': True, 'port': iperf3_port, 'hostname': iperf3_hostname })
 
 if __name__ == '__main__':
