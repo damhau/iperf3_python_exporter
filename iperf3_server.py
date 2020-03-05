@@ -1,5 +1,6 @@
 #!/bin/python
 from flask import Flask, jsonify, request
+from gevent.pywsgi import WSGIServer
 import iperf3
 from concurrent.futures import ThreadPoolExecutor
 import random
@@ -55,4 +56,6 @@ def route_iperf3_increment():
     return jsonify({'started': True, 'port': iperf3_port, 'hostname': iperf3_hostname })
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=iperf3_server_port)
+    # app.run(host='0.0.0.0', port=iperf3_server_port)
+    http_server = WSGIServer(('', iperf3_server_port), app)
+    http_server.serve_forever()

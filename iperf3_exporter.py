@@ -1,5 +1,6 @@
 #!/bin/python
 from flask import Flask, send_file, request, Response
+from gevent.pywsgi import WSGIServer
 from prometheus_client import start_http_server, Counter, generate_latest, Gauge
 import logging
 import requests
@@ -89,4 +90,6 @@ def get_data():
  
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='9100')
+    # app.run(host='0.0.0.0', port='9100')
+    http_server = WSGIServer(('', 9100), app)
+    http_server.serve_forever()

@@ -2,3 +2,4 @@ flask
 iperf3
 prometheus_client
 requests
+wsgiserver
