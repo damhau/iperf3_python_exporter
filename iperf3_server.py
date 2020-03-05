@@ -5,6 +5,7 @@ import iperf3
 from concurrent.futures import ThreadPoolExecutor
 import random
 import argparse
+import logging
 
 app = Flask(__name__)
 app.debug = False
@@ -18,6 +19,10 @@ parser.add_argument('-p', '--port', action='store', dest='port', type=int, help=
 parser.add_argument('-n', '--name', action='store', dest='name', help="Iperf3 server hostname")
 args = parser.parse_args()
 
+# Instanciate Logger
+logging.basicConfig(filename='/var/log/iperf_server.log',level=logging.DEBUG)
+logging.debug('Starting iperf_server')
+
 # vars
 iperf3_server_port = args.port
 iperf3_start_port = args.start_port
@@ -26,9 +31,13 @@ iperf3_hostname = args.name
 iperf3_port = iperf3_start_port + 1
 
 def start_iperf3_thread(port):
+    logging.debug('Started iperf thread')
     server = iperf3.Server()
+    logging.debug('server' + str(server))
     server.port = port
+    logging.debug('server.port' + str(server.port))
     server.run()
+    logging.debug('server.run' + str(server))
 
 @app.route('/iperf3')
 def route_iperf3():
