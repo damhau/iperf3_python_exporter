@@ -12,12 +12,14 @@ parser = argparse.ArgumentParser()
    
 parser.add_argument('-s', '--start_port', action='store', dest='start_port', type=int, help="Random iperf3 server range start port")
 parser.add_argument('-e', '--end_port', action='store', dest='end_port', type=int, help="Random iperf3 server range end port")
+parser.add_argument('-p', '--port', action='store', dest='port', type=int, help="Random iperf3 server api port")
 parser.add_argument('-n', '--name', action='store', dest='name', help="Iperf3 server hostname")
 
 args = parser.parse_args()
 
 
 # vars
+iperf3_server_port = args.port
 iperf3_start_port = args.start_port
 iperf3_end_port = args.end_port
 iperf3_hostname = args.name
@@ -55,4 +57,4 @@ def route_iperf3_increment():
     return jsonify({'started': True, 'port': iperf3_port, 'hostname': iperf3_hostname })
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=iperf3_server_port, debug=false)
