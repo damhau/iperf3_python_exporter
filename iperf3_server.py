@@ -17,12 +17,20 @@ parser.add_argument('-s', '--start_port', action='store', dest='start_port', typ
 parser.add_argument('-e', '--end_port', action='store', dest='end_port', type=int, help="Random iperf3 server range end port")
 parser.add_argument('-p', '--port', action='store', dest='port', type=int, help="Random iperf3 server api port")
 parser.add_argument('-n', '--name', action='store', dest='name', help="Iperf3 server hostname")
-parser.add_argument('-l', '--log', action='store', dest='log', help="Log level")
+parser.add_argument("-v", "--verbose", action = "count", default = 2, help = "Increase verbosity")
 args = parser.parse_args()
 
 # Instanciate Logger
-log_level = "logging." + str(args.log)
-logging.basicConfig(level=logging.DEBUG)
+try:
+    loglevel = {
+        0: logging.ERROR,
+        1: logging.WARN,
+        2: logging.INFO
+        3: logging.DEBUG
+    }[args.verbose]
+except KeyError:
+    loglevel = logging.INFO
+logging.basicConfig(level=loglevel)
 logging.info('Starting iperf_server')
 
 # vars
