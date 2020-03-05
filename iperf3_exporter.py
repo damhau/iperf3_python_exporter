@@ -5,13 +5,16 @@ from prometheus_client import start_http_server, Counter, generate_latest, Gauge
 import logging
 import requests
 import iperf3
+import logging
+
 
 # Instanciate Flask app
 app = Flask(__name__)
 app.debug = False
 
 # Instanciate Logger
-logger = logging.getLogger(__name__)
+logging.basicConfig(filename='/var/log/iperf_exporter.log',level=logging.DEBUG)
+logging.debug('Starting iperf_exporter')
  
 # Misc vars
 CONTENT_TYPE_LATEST = str('text/plain; version=0.0.4; charset=utf-8')
@@ -44,10 +47,22 @@ def get_data():
     iperf3_num_streams = request.args.get('streams')
     iperf3_reverse = request.args.get('reverse')
     iperf3_api_port = request.args.get('apiport')
+    logging.debug('Received http request to /metric')
+    logging.debug('iperf3_server:' + str(iperf3_server))
+    logging.debug('iperf3_proto:' + str(iperf3_proto))
+    logging.debug('iperf3_omit:' + str(iperf3_omit))
+    logging.debug('iperf3_duration:' + str(iperf3_duration))
+    logging.debug('iperf3_bandwidth:' + str(iperf3_bandwidth))
+    logging.debug('iperf3_num_streams:' + str(iperf3_num_streams))
+    logging.debug('iperf3_reverse:' + str(iperf3_reverse))
+    logging.debug('iperf3_api_port:' + str(iperf3_api_port))
 
+    logging.debug("http://" + iperf3_server + ":" + iperf3_api_port + "/iperf3_increment")
     url = "http://" + iperf3_server + ":" + iperf3_api_port + "/iperf3_increment"
     response = requests.get(url)
     json_data = response.json()
+    logging.debug("Json data:")
+    logging.debug(json_data)
     iperf3_server_port = json_data['port']
 
     if iperf3_proto == 'tcp':
