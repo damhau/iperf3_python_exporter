@@ -22,7 +22,7 @@ args = parser.parse_args()
 
 # Instanciate Logger
 log_level = "logging." + str(args.log)
-logging.basicConfig(level=log_level)
+logging.basicConfig(level=logging.DEBUG)
 logging.info('Starting iperf_server')
 
 # vars
