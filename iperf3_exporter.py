@@ -77,8 +77,8 @@ def get_data():
     logging.debug('iperf3_reverse:' + str(iperf3_reverse))
     logging.debug('iperf3_api_port:' + str(iperf3_api_port))
 
-    logging.debug("http://" + iperf3_server + ":" + iperf3_api_port + "/iperf3_increment")
-    url = "http://" + iperf3_server + ":" + iperf3_api_port + "/iperf3_increment"
+    logging.debug("http://" + iperf3_server + ":" + iperf3_api_port + "/iperf3_random")
+    url = "http://" + iperf3_server + ":" + iperf3_api_port + "/iperf3_random"
     response = requests.get(url)
     json_data = response.json()
     logging.debug("Json data:")
@@ -102,12 +102,12 @@ def get_data():
         logging.debug('client.port:' + str(client.port))
         result = client.run()
         logging.debug('client:' + str(result))
-        iperf3_tcp_tcp_mss_default.labels(server=iperf3_server, protocol=iperf3_proto).set(result.tcp_mss_default)
-        iperf3_tcp_retransmits.labels(server=iperf3_server, protocol=iperf3_proto).set(result.retransmits)
-        iperf3_tcp_sent_bytes.labels(server=iperf3_server, protocol=iperf3_proto).set(result.sent_bytes)
-        iperf3_tcp_sent_bps.labels(server=iperf3_server, protocol=iperf3_proto).set(result.sent_bps)
-        iperf3_tcp_received_bytes.labels(server=iperf3_server, protocol=iperf3_proto).set(result.received_bytes)
-        iperf3_tcp_received_bps.labels(server=iperf3_server, protocol=iperf3_proto).set(result.received_bps)
+        iperf3_tcp_tcp_mss_default.labels(protocol=iperf3_proto).set(result.tcp_mss_default)
+        iperf3_tcp_retransmits.labels(protocol=iperf3_proto).set(result.retransmits)
+        iperf3_tcp_sent_bytes.labels(protocol=iperf3_proto).set(result.sent_bytes)
+        iperf3_tcp_sent_bps.labels(protocol=iperf3_proto).set(result.sent_bps)
+        iperf3_tcp_received_bytes.labels(protocol=iperf3_proto).set(result.received_bytes)
+        iperf3_tcp_received_bps.labels(protocol=iperf3_proto).set(result.received_bps)
     elif iperf3_proto == 'udp':
         client = iperf3.Client()
         if iperf3_duration:
@@ -121,13 +121,13 @@ def get_data():
         client.port = iperf3_server_port
         logging.info('Started udp iperf test')
         result = client.run()
-        iperf3_udp_bytes.labels(server=iperf3_server, protocol=iperf3_proto).set(result.bytes)
-        iperf3_udp_bps.labels(server=iperf3_server, protocol=iperf3_proto).set(result.bps)
-        iperf3_udp_jitter_ms.labels(server=iperf3_server, protocol=iperf3_proto).set(result.jitter_ms)
-        iperf3_udp_packets.labels(server=iperf3_server, protocol=iperf3_proto).set(result.packets)
-        iperf3_udp_lost_packets.labels(server=iperf3_server, protocol=iperf3_proto).set(result.lost_packets)
-        iperf3_udp_lost_percent.labels(server=iperf3_server, protocol=iperf3_proto).set(result.lost_percent)
-        iperf3_udp_seconds.labels(server=iperf3_server, protocol=iperf3_proto).set(result.seconds)
+        iperf3_udp_bytes.labels(protocol=iperf3_proto).set(result.bytes)
+        iperf3_udp_bps.labels(protocol=iperf3_proto).set(result.bps)
+        iperf3_udp_jitter_ms.labels(protocol=iperf3_proto).set(result.jitter_ms)
+        iperf3_udp_packets.labels(protocol=iperf3_proto).set(result.packets)
+        iperf3_udp_lost_packets.labels(protocol=iperf3_proto).set(result.lost_packets)
+        iperf3_udp_lost_percent.labels(protocol=iperf3_proto).set(result.lost_percent)
+        iperf3_udp_seconds.labels(protocol=iperf3_proto).set(result.seconds)
 
     return Response(generate_latest(), mimetype=CONTENT_TYPE_LATEST)
  
