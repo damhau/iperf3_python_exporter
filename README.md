@@ -11,11 +11,13 @@ The server part will provide an api to request a iperf3 instance on a random or 
 ### Centos/Rhel
 
 pip3 install -r requierments.txt
+
 yum install iperf3
 
 ### Debian/Ubuntu
 
 pip3 install -r requierments.txt
+
 apt install iperf3
 
 ## Getting Started
