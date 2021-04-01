@@ -108,6 +108,8 @@ def get_data():
         iperf3_tcp_sent_bps.set(result.sent_bps)
         iperf3_tcp_received_bytes.set(result.received_bytes)
         iperf3_tcp_received_bps.set(result.received_bps)
+        del client # This fix a crash happening on Centos 8
+        
     elif iperf3_proto == 'udp':
         client = iperf3.Client()
         if iperf3_duration:
@@ -128,7 +130,8 @@ def get_data():
         iperf3_udp_lost_packets.set(result.lost_packets)
         iperf3_udp_lost_percent.set(result.lost_percent)
         iperf3_udp_seconds.set(result.seconds)
-
+        del client # This fix a crash happening on Centos 8
+        
     return Response(generate_latest(), mimetype=CONTENT_TYPE_LATEST)
  
 
